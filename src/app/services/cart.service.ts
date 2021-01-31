@@ -1,6 +1,6 @@
+import { NotificationFactory } from './../classes/notificationFactory.class';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import Swal from 'sweetalert2';
 import { Product } from '../models/product.model';
 
 @Injectable({
@@ -8,7 +8,7 @@ import { Product } from '../models/product.model';
 })
 export class CartService {
   private subject = new Subject<any>();
-
+  private notificationFactory: NotificationFactory = new NotificationFactory();
   constructor() { }
 
   createCart(){
@@ -35,7 +35,7 @@ export class CartService {
       console.log('INDICE:', index)
       cart[index].Cantidad++;
     }
-    Swal.fire('Felicidades', 'Se agregó el producto al carrito', 'success');
+    this.notificationFactory.getNotification('Se agregó el producto al carrito', 'info');
     localStorage.setItem('cart', JSON.stringify(cart));
     this.subject.next(this.countProductsCart());
 
@@ -65,7 +65,13 @@ export class CartService {
     cart.forEach((product: Product) => {
       total += product.Cantidad*product.Precio;
     });
+    return total;
+  }
 
+  getTotalAmountProduct(){
+    let total = 0;
+    const productSelected: Product = JSON.parse(localStorage.getItem('productSelected'));
+    total = productSelected.Precio;
     return total;
   }
 }

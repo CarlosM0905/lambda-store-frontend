@@ -1,6 +1,7 @@
+import { NotificationFactory } from './../../classes/notificationFactory.class';
+import { PaymentService } from './../../services/payment.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-credit-card',
@@ -9,19 +10,33 @@ import Swal from 'sweetalert2'
 })
 export class CreditCardComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  firstName: string;
+  lastName: string;
+  cardNumber: string;
+  cardMonth: number;
+  cardYear: number;
+  cardCode: string;
+  notificationFactory: NotificationFactory = new NotificationFactory();
+
+  constructor(
+    private router:Router, 
+    private paymentService: PaymentService,
+   ) { }
 
   ngOnInit(): void {
   }
 
   endBuy(){
-    if(true){
-      Swal.fire('¡Felicitaciones!', 'Su pago se hizo correctamente', 'success');
+    const totalAmount: number = JSON.parse(localStorage.getItem('totalAmount'));
+    this.paymentService.doPayment(totalAmount, this.cardMonth, this.cardYear, this.cardCode, this.cardNumber)
+    .then(response => {
+      console.log(response);
+      this.notificationFactory.getNotification('El pago se hizo correctamente', 'success')
       this.router.navigateByUrl('/home');
-    }
-    else{
-
-    }
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
 }

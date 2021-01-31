@@ -1,3 +1,3 @@
 export const CONSTANTS = {
-    sendPrice: 20,
+    sendPrice: 0,
   };

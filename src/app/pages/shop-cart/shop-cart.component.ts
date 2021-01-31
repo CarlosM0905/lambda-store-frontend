@@ -31,6 +31,7 @@ export class ShopCartComponent implements OnInit {
       this.router.navigateByUrl('/login');
     }
     else{
+      localStorage.setItem('totalAmount', JSON.stringify(this.total));
       this.router.navigateByUrl('/credit-card');
     }
   }

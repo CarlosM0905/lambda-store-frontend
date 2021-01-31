@@ -1,8 +1,8 @@
+import { NotificationFactory } from './../../classes/notificationFactory.class';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
-import Swal  from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +13,11 @@ export class LoginComponent implements OnInit {
 
   user: string;
   password: string;
-
-  constructor(private authService: AuthService, private router: Router) { }
+  notificationFactory: NotificationFactory = new NotificationFactory();
+  constructor(
+      private authService: AuthService, 
+      private router: Router, 
+      ) { }
 
   ngOnInit(): void {
   }
@@ -27,7 +30,6 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(user)
     .then(((results: any) => {
-      console.log(results);
         if(results.ok){
           if(!localStorage.getItem('isUser')){
             this.router.navigateByUrl('/credit-card');
@@ -37,7 +39,7 @@ export class LoginComponent implements OnInit {
     }))
     .catch(err => {
       console.log(err);
-      Swal.fire('Error', err.error.message, 'error')
+      this.notificationFactory.getNotification(err.error.message, 'error');
     })
     ;
   }

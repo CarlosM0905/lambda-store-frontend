@@ -1,7 +1,7 @@
+import { Router } from '@angular/router';
 import { CartService } from './../../services/cart.service';
 import { Product } from './../../models/product.model';
 import { Component, Input, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-card-product',
@@ -11,13 +11,27 @@ import Swal from 'sweetalert2';
 export class CardProductComponent implements OnInit {
 
   @Input() product: Product;
-  constructor(private cartService: CartService) { }
+  constructor(
+    private cartService: CartService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
   }
 
   addToCart(){
     this.cartService.addToCart(this.product);
+  }
+
+  buyProduct(){
+    localStorage.setItem('productSelected', JSON.stringify(this.product));
+    const isLogged = JSON.parse(localStorage.getItem('isUser'));
+    if(isLogged){
+      this.router.navigateByUrl('/credit-card');
+    }
+    else{
+      this.router.navigateByUrl('/login');
+    }
   }
 
 }
