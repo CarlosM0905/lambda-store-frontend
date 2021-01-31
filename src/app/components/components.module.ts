@@ -5,18 +5,19 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 /*================ COMPONENTS ================*/
+import { CardProductComponent } from './card-product/card-product.component';
 
 /*================ PIPE ================*/
 
 /*================ MODULES ================*/
 
 const COMPONENTS = [
-
+    CardProductComponent
 ];
 
 @NgModule({
     declarations: [
-        ...COMPONENTS
+        ...COMPONENTS,
     ],
     exports: [
         ...COMPONENTS

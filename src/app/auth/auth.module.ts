@@ -5,18 +5,19 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 /*================ COMPONENTS ================*/
+import { LoginComponent } from './login/login.component';
 
 /*================ PIPE ================*/
 
 /*================ MODULES ================*/
 
 const AUTH_COMPONENTS = [
-
+    LoginComponent
 ];
 
 @NgModule({
     declarations: [
-        ...AUTH_COMPONENTS
+        ...AUTH_COMPONENTS,
     ],
     exports: [
         ...AUTH_COMPONENTS

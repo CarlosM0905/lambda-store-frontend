@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core';
 
 const APP_ROUTES: Routes = [
     {
-        path: '', redirectTo: '/login', pathMatch: 'full'
+        path: '', redirectTo: '/home', pathMatch: 'full'
     },
 ];
 

@@ -1,0 +1,26 @@
+<div class="row d-flex justify-content-center mt-5 pt-5">
+    <div class="col-4">
+        <div class="card mb-3">
+            <h3 class="card-header text-center">Iniciar Sesión</h3>
+            <div class="card-body">
+              <div class="row">
+                  <div class="col-12 d-flex justify-content-center">
+                      <img src="assets/images/lambda.png"  class="img-fluid img-logo" alt="Lambda Icon">
+                  </div>
+                  <div class="col-12">
+                    <p class="mb-1 mt-2">Usuario:</p>
+                    <input type="text" class="form-control" [(ngModel)]="user" (keyup)="mostrarDatos()">
+                    
+                  </div>
+                  <div class="col-12">
+                    <p class="mb-1 mt-2">Contraseña:</p>
+                    <input type="text" class="form-control" [(ngModel)]="password">
+                  </div>
+              </div>
+            </div>
+            <div class="card-footer text-muted">
+              <button class="btn btn-info btn-block" (click)="login()">INGRESAR</button>
+            </div>
+          </div>
+    </div>
+</div>
